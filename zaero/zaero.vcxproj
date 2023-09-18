@@ -70,26 +70,26 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)Quake2\zaero\</OutDir>
+    <OutDir>$(SolutionDir)Rion\zaero\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>gamex86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Quake2\zaero\</OutDir>
+    <OutDir>$(SolutionDir)Rion\zaero\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <TargetName>gamex64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)Quake2\zaero\</OutDir>
+    <OutDir>$(SolutionDir)Rion\zaero\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>gamex86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Quake2\zaero\</OutDir>
+    <OutDir>$(SolutionDir)Rion\zaero\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <TargetName>gamex64</TargetName>
   </PropertyGroup>
