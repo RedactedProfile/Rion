@@ -164,7 +164,7 @@ char *Sys_ScanForCD (void)
 	{
 		// where activision put the stuff...
 		sprintf (cddir, "%sinstall\\data", drive);
-		sprintf (test, "%sinstall\\data\\quake2.exe", drive);
+		sprintf (test, "%sinstall\\data\\rion.exe", drive);
 		f = fopen(test, "r");
 		if (f)
 		{

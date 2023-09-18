@@ -357,21 +357,21 @@ void Sys_CopyProtect(void)
 		if (strcmp(ent->mnt_type, "iso9660") == 0) {
 			// found a cd file system
 			found_cd = true;
-			sprintf(path, "%s/%s", ent->mnt_dir, "install/data/quake2.exe");
+			sprintf(path, "%s/%s", ent->mnt_dir, "install/data/rion.exe");
 			if (stat(path, &st) == 0) {
 				// found it
 				checked = true;
 				endmntent(mnt);
 				return;
 			}
-			sprintf(path, "%s/%s", ent->mnt_dir, "Install/Data/quake2.exe");
+			sprintf(path, "%s/%s", ent->mnt_dir, "Install/Data/rion.exe");
 			if (stat(path, &st) == 0) {
 				// found it
 				checked = true;
 				endmntent(mnt);
 				return;
 			}
-			sprintf(path, "%s/%s", ent->mnt_dir, "quake2.exe");
+			sprintf(path, "%s/%s", ent->mnt_dir, "rion.exe");
 			if (stat(path, &st) == 0) {
 				// found it
 				checked = true;

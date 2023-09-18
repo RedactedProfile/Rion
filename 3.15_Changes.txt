@@ -11,7 +11,7 @@ by American McGee and Dave "Zoid" Kirsch.
 
 This patch replaces the following files:
 
-	quake2.exe
+	rion.exe
 	3dfxgl.dll
 	pvrgl.dll
 	ref_gl.dll

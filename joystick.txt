@@ -17,7 +17,7 @@ The input device support in Quake 2 is designed to take full advantage of your D
 Standard Joystick Directions:
 1.  Verify your joystick or game controller is selected in the Joystick (or Game Controllers) control panel applet.
 2.  Verify your device has been calibrated and tested.
-3.  Launch Quake 2 (quake2.exe).
+3.  Launch Quake 2 (rion.exe).
 4.  Type 'in_joystick 1' at the console to enable your joystick (only needs to by typed in one time).
 From then on, just launch Quake 2.
 
@@ -27,7 +27,7 @@ Advanced Controller Directions:
 2.  Verify your device has been calibrated and tested.
 3.  Get the configuration file for your controller from your manufacturer's website or copy from the selections below.
 4.  Place the configuration file in your quake2\baserion directory.
-6.  Launch Quake 2 (quake2.exe).
+6.  Launch Quake 2 (rion.exe).
 7.  Type 'exec <configuration file name here>' at the console to enable your advanced controller each time you launch Quake 2.
 Optionally you can:
 Create or modify quake2\baserion\autoexec.cfg to include an exec to your configuration file (i.e. 'exec adva3d.cfg').  This will automatically load your configuration file each time you launch Quake 2.
