@@ -25,8 +25,8 @@
   This binding will cause the current demo playing to zip into timedemo mode 
   while F7 is depressed, effectively acting like a fast forward key.
 - Wrong packaging of 3.19 patch.  The Rogue CD has a 45k pak2 and vwep .md2 
-  files in baseq2/players, but the 3.19 x86 patch we released has a 2.7MB 
-  pak2.  3.20 has a 45k pak2 and the vwep models go in baseq2/players.
+  files in baserion/players, but the 3.19 x86 patch we released has a 2.7MB 
+  pak2.  3.20 has a 45k pak2 and the vwep models go in baserion/players.
 - VWep code has been added to Xatrix dll, new VWep models for the Xatrix 
   specific weapons (Ion Ripper and Phalanx) have been included.
 - Rogue Linux game library was wrong version and had some unlinked symbols,

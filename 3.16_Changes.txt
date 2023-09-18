@@ -5,7 +5,7 @@ Quake2 3.16 Upgrade
 This upgrade addresses several features, including security, playability, and
 enhancements.
 
-A new map is also included (in baseq2\pak3.pak) called match1, Reckless
+A new map is also included (in baserion\pak3.pak) called match1, Reckless
 Abandon.  This map is designed for one on one deathmatch play.  It was built
 by American McGee and Dave "Zoid" Kirsch.
 

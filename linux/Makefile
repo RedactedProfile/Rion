@@ -128,7 +128,7 @@ DO_SHLIB_AS=$(CC) $(CFLAGS) $(SHLIBCFLAGS) -DELF -x assembler-with-cpp -o $@ -c 
 
 ifeq ($(ARCH),axp)
 TARGETS=$(BUILDDIR)/q2ded \
-	$(BUILDDIR)/baseq2/game$(ARCH).$(SHLIBEXT) \
+	$(BUILDDIR)/baserion/game$(ARCH).$(SHLIBEXT) \
 	$(BUILDDIR)/ctf/game$(ARCH).$(SHLIBEXT) \
 	$(BUILDDIR)/xatrix/game$(ARCH).$(SHLIBEXT) \
 	$(BUILDDIR)/rogue/game$(ARCH).$(SHLIBEXT) \
@@ -137,7 +137,7 @@ TARGETS=$(BUILDDIR)/q2ded \
 else
 TARGETS=$(BUILDDIR)/quake2 \
 	$(BUILDDIR)/q2ded \
-	$(BUILDDIR)/baseq2/game$(ARCH).$(SHLIBEXT) \
+	$(BUILDDIR)/baserion/game$(ARCH).$(SHLIBEXT) \
 	$(BUILDDIR)/ctf/game$(ARCH).$(SHLIBEXT) \
 	$(BUILDDIR)/ref_vk.$(SHLIBEXT) \
 	$(BUILDDIR)/ref_glx.$(SHLIBEXT) \
@@ -152,7 +152,7 @@ endif
 
 build_debug:
 	@-mkdir -p $(BUILD_DEBUG_DIR) \
-		$(BUILD_DEBUG_DIR)/baseq2 \
+		$(BUILD_DEBUG_DIR)/baserion \
 		$(BUILD_DEBUG_DIR)/client \
 		$(BUILD_DEBUG_DIR)/ded \
 		$(BUILD_DEBUG_DIR)/ref_soft \
@@ -168,7 +168,7 @@ build_debug:
 
 build_release:
 	@-mkdir -p $(BUILD_RELEASE_DIR) \
-		$(BUILD_RELEASE_DIR)/baseq2 \
+		$(BUILD_RELEASE_DIR)/baserion \
 		$(BUILD_RELEASE_DIR)/client \
 		$(BUILD_RELEASE_DIR)/ded \
 		$(BUILD_RELEASE_DIR)/ref_soft \
@@ -563,7 +563,7 @@ GAME_OBJS = \
 	$(BUILDDIR)/game/p_weapon.o \
 	$(BUILDDIR)/game/m_flash.o
 
-$(BUILDDIR)/baseq2/game$(ARCH).$(SHLIBEXT) : $(GAME_OBJS)
+$(BUILDDIR)/baserion/game$(ARCH).$(SHLIBEXT) : $(GAME_OBJS)
 	$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(GAME_OBJS)
 
 $(BUILDDIR)/game/g_ai.o :        $(GAME_DIR)/g_ai.c
@@ -2231,10 +2231,10 @@ copyfiles:
 	cp $(BUILD_RELEASE_DIR)/q2ded $(COPYDIR)
 	strip $(COPYDIR)/q2ded
 	chmod 755 $(COPYDIR)/q2ded
-	-mkdir $(COPYDIR)/baseq2
-	chmod 755 $(COPYDIR)/baseq2
-	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(COPYDIR)/baseq2
-	chmod 755 $(COPYDIR)/baseq2/game$(ARCH).$(SHLIBEXT)
+	-mkdir $(COPYDIR)/baserion
+	chmod 755 $(COPYDIR)/baserion
+	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(COPYDIR)/baserion
+	chmod 755 $(COPYDIR)/baserion/game$(ARCH).$(SHLIBEXT)
 	-mkdir $(COPYDIR)/ctf
 	chmod 755 $(COPYDIR)/ctf
 	cp $(BUILD_RELEASE_DIR)/ctf/game$(ARCH).$(SHLIBEXT) $(COPYDIR)/ctf
@@ -2284,9 +2284,9 @@ rpm-quake2: quake2.spec
 	-mkdirhier $(QUAKE2INSTDIR)
 	cp $(BUILD_RELEASE_DIR)/quake2 $(QUAKE2INSTDIR)/quake2
 	strip $(QUAKE2INSTDIR)/quake2
-	-mkdir $(QUAKE2INSTDIR)/baseq2
-	chmod 1777 $(QUAKE2INSTDIR)/baseq2
-	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(QUAKE2INSTDIR)/baseq2
+	-mkdir $(QUAKE2INSTDIR)/baserion
+	chmod 1777 $(QUAKE2INSTDIR)/baserion
+	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(QUAKE2INSTDIR)/baserion
 	cp $(BUILD_RELEASE_DIR)/ref_soft.$(SHLIBEXT)  $(QUAKE2INSTDIR)
 	cp $(BUILD_RELEASE_DIR)/ref_softx.$(SHLIBEXT) $(QUAKE2INSTDIR)
 	cp $(BUILD_RELEASE_DIR)/ref_gl.$(SHLIBEXT) $(QUAKE2INSTDIR)
@@ -2320,156 +2320,156 @@ QUAKE2DATADIR = $(TMPDIR)/quake2-data-$(VERSION)/$(INSTALLDIR)
 rpm-quake2-data: quake2-data.spec
 	touch $(RPMROOT)/SOURCES/quake2-data-$(VERSION).tar.gz
 	if [ ! -d archives ];then mkdir archives;fi
-	-mkdirhier $(QUAKE2DATADIR)/baseq2
-	-mkdirhier $(QUAKE2DATADIR)/baseq2/players
-	-mkdirhier $(QUAKE2DATADIR)/baseq2/players/cyborg
-	-mkdirhier $(QUAKE2DATADIR)/baseq2/players/female
-	-mkdirhier $(QUAKE2DATADIR)/baseq2/players/male
-	cp $(QUAKE2_DIR)/baseq2/pak0.pak							 	 $(QUAKE2DATADIR)/baseq2/pak0.pak                         
-	cp $(QUAKE2_DIR)/baseq2/pak1.pak                                 $(QUAKE2DATADIR)/baseq2/pak1.pak                         
-	cp $(QUAKE2_DIR)/baseq2/pak2.pak                                 $(QUAKE2DATADIR)/baseq2/pak2.pak                         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/a_grenades.md2            $(QUAKE2DATADIR)/baseq2/players/cyborg/a_grenades.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_bfg.md2                 $(QUAKE2DATADIR)/baseq2/players/cyborg/w_bfg.md2         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_blaster.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_blaster.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_chainfist.md2           $(QUAKE2DATADIR)/baseq2/players/cyborg/w_chainfist.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_chaingun.md2            $(QUAKE2DATADIR)/baseq2/players/cyborg/w_chaingun.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_disrupt.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_disrupt.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_etfrifle.md2            $(QUAKE2DATADIR)/baseq2/players/cyborg/w_etfrifle.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_glauncher.md2           $(QUAKE2DATADIR)/baseq2/players/cyborg/w_glauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_grapple.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_grapple.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_hyperblaster.md2        $(QUAKE2DATADIR)/baseq2/players/cyborg/w_hyperblaster.md2
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_machinegun.md2          $(QUAKE2DATADIR)/baseq2/players/cyborg/w_machinegun.md2  
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_phalanx.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_phalanx.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_plasma.md2              $(QUAKE2DATADIR)/baseq2/players/cyborg/w_plasma.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_plauncher.md2           $(QUAKE2DATADIR)/baseq2/players/cyborg/w_plauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_railgun.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_railgun.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_ripper.md2              $(QUAKE2DATADIR)/baseq2/players/cyborg/w_ripper.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_rlauncher.md2           $(QUAKE2DATADIR)/baseq2/players/cyborg/w_rlauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_shotgun.md2             $(QUAKE2DATADIR)/baseq2/players/cyborg/w_shotgun.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/w_sshotgun.md2            $(QUAKE2DATADIR)/baseq2/players/cyborg/w_sshotgun.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/female/a_grenades.md2            $(QUAKE2DATADIR)/baseq2/players/female/a_grenades.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_bfg.md2                 $(QUAKE2DATADIR)/baseq2/players/female/w_bfg.md2         
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_blaster.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_blaster.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_chainfist.md2           $(QUAKE2DATADIR)/baseq2/players/female/w_chainfist.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_chaingun.md2            $(QUAKE2DATADIR)/baseq2/players/female/w_chaingun.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_disrupt.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_disrupt.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_etfrifle.md2            $(QUAKE2DATADIR)/baseq2/players/female/w_etfrifle.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_glauncher.md2           $(QUAKE2DATADIR)/baseq2/players/female/w_glauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_grapple.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_grapple.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_hyperblaster.md2        $(QUAKE2DATADIR)/baseq2/players/female/w_hyperblaster.md2
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_machinegun.md2          $(QUAKE2DATADIR)/baseq2/players/female/w_machinegun.md2  
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_phalanx.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_phalanx.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_plasma.md2              $(QUAKE2DATADIR)/baseq2/players/female/w_plasma.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_plauncher.md2           $(QUAKE2DATADIR)/baseq2/players/female/w_plauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_railgun.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_railgun.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_ripper.md2              $(QUAKE2DATADIR)/baseq2/players/female/w_ripper.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_rlauncher.md2           $(QUAKE2DATADIR)/baseq2/players/female/w_rlauncher.md2   
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_shotgun.md2             $(QUAKE2DATADIR)/baseq2/players/female/w_shotgun.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/female/w_sshotgun.md2            $(QUAKE2DATADIR)/baseq2/players/female/w_sshotgun.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/male/a_grenades.md2              $(QUAKE2DATADIR)/baseq2/players/male/a_grenades.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_bfg.md2                   $(QUAKE2DATADIR)/baseq2/players/male/w_bfg.md2           
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_blaster.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_blaster.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_chainfist.md2             $(QUAKE2DATADIR)/baseq2/players/male/w_chainfist.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_chaingun.md2              $(QUAKE2DATADIR)/baseq2/players/male/w_chaingun.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_disrupt.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_disrupt.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_etfrifle.md2              $(QUAKE2DATADIR)/baseq2/players/male/w_etfrifle.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_glauncher.md2             $(QUAKE2DATADIR)/baseq2/players/male/w_glauncher.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_grapple.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_grapple.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_hyperblaster.md2          $(QUAKE2DATADIR)/baseq2/players/male/w_hyperblaster.md2  
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_machinegun.md2            $(QUAKE2DATADIR)/baseq2/players/male/w_machinegun.md2    
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_phalanx.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_phalanx.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_plasma.md2                $(QUAKE2DATADIR)/baseq2/players/male/w_plasma.md2        
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_plauncher.md2             $(QUAKE2DATADIR)/baseq2/players/male/w_plauncher.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_railgun.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_railgun.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_ripper.md2                $(QUAKE2DATADIR)/baseq2/players/male/w_ripper.md2        
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_rlauncher.md2             $(QUAKE2DATADIR)/baseq2/players/male/w_rlauncher.md2     
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_shotgun.md2               $(QUAKE2DATADIR)/baseq2/players/male/w_shotgun.md2       
-	cp $(QUAKE2_DIR)/baseq2/players/male/w_sshotgun.md2              $(QUAKE2DATADIR)/baseq2/players/male/w_sshotgun.md2      
-	cp $(QUAKE2_DIR)/baseq2/players/female/athena.pcx                $(QUAKE2DATADIR)/baseq2/players/female/athena.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/female/athena_i.pcx              $(QUAKE2DATADIR)/baseq2/players/female/athena_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/brianna.pcx               $(QUAKE2DATADIR)/baseq2/players/female/brianna.pcx       
-	cp $(QUAKE2_DIR)/baseq2/players/female/brianna_i.pcx             $(QUAKE2DATADIR)/baseq2/players/female/brianna_i.pcx     
-	cp $(QUAKE2_DIR)/baseq2/players/female/cobalt.pcx                $(QUAKE2DATADIR)/baseq2/players/female/cobalt.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/female/cobalt_i.pcx              $(QUAKE2DATADIR)/baseq2/players/female/cobalt_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/ensign.pcx                $(QUAKE2DATADIR)/baseq2/players/female/ensign.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/female/ensign_i.pcx              $(QUAKE2DATADIR)/baseq2/players/female/ensign_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/jezebel.pcx               $(QUAKE2DATADIR)/baseq2/players/female/jezebel.pcx       
-	cp $(QUAKE2_DIR)/baseq2/players/female/jezebel_i.pcx             $(QUAKE2DATADIR)/baseq2/players/female/jezebel_i.pcx     
-	cp $(QUAKE2_DIR)/baseq2/players/female/jungle.pcx                $(QUAKE2DATADIR)/baseq2/players/female/jungle.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/female/jungle_i.pcx              $(QUAKE2DATADIR)/baseq2/players/female/jungle_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/lotus.pcx                 $(QUAKE2DATADIR)/baseq2/players/female/lotus.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/female/lotus_i.pcx               $(QUAKE2DATADIR)/baseq2/players/female/lotus_i.pcx       
-	cp $(QUAKE2_DIR)/baseq2/players/female/stiletto.pcx              $(QUAKE2DATADIR)/baseq2/players/female/stiletto.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/stiletto_i.pcx            $(QUAKE2DATADIR)/baseq2/players/female/stiletto_i.pcx    
-	cp $(QUAKE2_DIR)/baseq2/players/female/tris.md2                  $(QUAKE2DATADIR)/baseq2/players/female/tris.md2          
-	cp $(QUAKE2_DIR)/baseq2/players/female/venus.pcx                 $(QUAKE2DATADIR)/baseq2/players/female/venus.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/female/venus_i.pcx               $(QUAKE2DATADIR)/baseq2/players/female/venus_i.pcx       
-	cp $(QUAKE2_DIR)/baseq2/players/female/voodoo.pcx                $(QUAKE2DATADIR)/baseq2/players/female/voodoo.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/female/voodoo_i.pcx              $(QUAKE2DATADIR)/baseq2/players/female/voodoo_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/female/weapon.md2                $(QUAKE2DATADIR)/baseq2/players/female/weapon.md2        
-	cp $(QUAKE2_DIR)/baseq2/players/female/weapon.pcx                $(QUAKE2DATADIR)/baseq2/players/female/weapon.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/cipher.pcx                  $(QUAKE2DATADIR)/baseq2/players/male/cipher.pcx          
-	cp $(QUAKE2_DIR)/baseq2/players/male/cipher_i.pcx                $(QUAKE2DATADIR)/baseq2/players/male/cipher_i.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/claymore.pcx                $(QUAKE2DATADIR)/baseq2/players/male/claymore.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/claymore_i.pcx              $(QUAKE2DATADIR)/baseq2/players/male/claymore_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/male/flak.pcx                    $(QUAKE2DATADIR)/baseq2/players/male/flak.pcx            
-	cp $(QUAKE2_DIR)/baseq2/players/male/flak_i.pcx                  $(QUAKE2DATADIR)/baseq2/players/male/flak_i.pcx          
-	cp $(QUAKE2_DIR)/baseq2/players/male/grunt.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/grunt.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/grunt_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/grunt_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/howitzer.pcx                $(QUAKE2DATADIR)/baseq2/players/male/howitzer.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/howitzer_i.pcx              $(QUAKE2DATADIR)/baseq2/players/male/howitzer_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/male/major.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/major.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/major_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/major_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/nightops.pcx                $(QUAKE2DATADIR)/baseq2/players/male/nightops.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/nightops_i.pcx              $(QUAKE2DATADIR)/baseq2/players/male/nightops_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/male/pointman.pcx                $(QUAKE2DATADIR)/baseq2/players/male/pointman.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/pointman_i.pcx              $(QUAKE2DATADIR)/baseq2/players/male/pointman_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/male/psycho.pcx                  $(QUAKE2DATADIR)/baseq2/players/male/psycho.pcx          
-	cp $(QUAKE2_DIR)/baseq2/players/male/psycho_i.pcx                $(QUAKE2DATADIR)/baseq2/players/male/psycho_i.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/rampage.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/rampage.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/rampage_i.pcx               $(QUAKE2DATADIR)/baseq2/players/male/rampage_i.pcx       
-	cp $(QUAKE2_DIR)/baseq2/players/male/razor.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/razor.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/razor_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/razor_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/recon.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/recon.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/recon_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/recon_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/scout.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/scout.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/scout_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/scout_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/sniper.pcx                  $(QUAKE2DATADIR)/baseq2/players/male/sniper.pcx          
-	cp $(QUAKE2_DIR)/baseq2/players/male/sniper_i.pcx                $(QUAKE2DATADIR)/baseq2/players/male/sniper_i.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/male/tris.md2                    $(QUAKE2DATADIR)/baseq2/players/male/tris.md2            
-	cp $(QUAKE2_DIR)/baseq2/players/male/viper.pcx                   $(QUAKE2DATADIR)/baseq2/players/male/viper.pcx           
-	cp $(QUAKE2_DIR)/baseq2/players/male/viper_i.pcx                 $(QUAKE2DATADIR)/baseq2/players/male/viper_i.pcx         
-	cp $(QUAKE2_DIR)/baseq2/players/male/weapon.md2                  $(QUAKE2DATADIR)/baseq2/players/male/weapon.md2          
-	cp $(QUAKE2_DIR)/baseq2/players/male/weapon.pcx                  $(QUAKE2DATADIR)/baseq2/players/male/weapon.pcx          
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/bump1.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/bump1.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/death1.wav                $(QUAKE2DATADIR)/baseq2/players/cyborg/death1.wav        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/death2.wav                $(QUAKE2DATADIR)/baseq2/players/cyborg/death2.wav        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/death3.wav                $(QUAKE2DATADIR)/baseq2/players/cyborg/death3.wav        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/death4.wav                $(QUAKE2DATADIR)/baseq2/players/cyborg/death4.wav        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/drown1.wav                $(QUAKE2DATADIR)/baseq2/players/cyborg/drown1.wav        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/fall1.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/fall1.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/fall2.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/fall2.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/gurp1.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/gurp1.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/gurp2.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/gurp2.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/jump1.wav                 $(QUAKE2DATADIR)/baseq2/players/cyborg/jump1.wav         
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/oni911.pcx                $(QUAKE2DATADIR)/baseq2/players/cyborg/oni911.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/oni911_i.pcx              $(QUAKE2DATADIR)/baseq2/players/cyborg/oni911_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain100_1.wav             $(QUAKE2DATADIR)/baseq2/players/cyborg/pain100_1.wav     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain100_2.wav             $(QUAKE2DATADIR)/baseq2/players/cyborg/pain100_2.wav     
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain25_1.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain25_1.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain25_2.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain25_2.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain50_1.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain50_1.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain50_2.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain50_2.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain75_1.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain75_1.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/pain75_2.wav              $(QUAKE2DATADIR)/baseq2/players/cyborg/pain75_2.wav      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/ps9000.pcx                $(QUAKE2DATADIR)/baseq2/players/cyborg/ps9000.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/ps9000_i.pcx              $(QUAKE2DATADIR)/baseq2/players/cyborg/ps9000_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/tris.md2                  $(QUAKE2DATADIR)/baseq2/players/cyborg/tris.md2          
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/tyr574.pcx                $(QUAKE2DATADIR)/baseq2/players/cyborg/tyr574.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/tyr574_i.pcx              $(QUAKE2DATADIR)/baseq2/players/cyborg/tyr574_i.pcx      
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/weapon.md2                $(QUAKE2DATADIR)/baseq2/players/cyborg/weapon.md2        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/weapon.pcx                $(QUAKE2DATADIR)/baseq2/players/cyborg/weapon.pcx        
-	cp $(QUAKE2_DIR)/baseq2/players/cyborg/weapon.pcx.pcx            $(QUAKE2DATADIR)/baseq2/players/cyborg/weapon.pcx.pcx    
+	-mkdirhier $(QUAKE2DATADIR)/baserion
+	-mkdirhier $(QUAKE2DATADIR)/baserion/players
+	-mkdirhier $(QUAKE2DATADIR)/baserion/players/cyborg
+	-mkdirhier $(QUAKE2DATADIR)/baserion/players/female
+	-mkdirhier $(QUAKE2DATADIR)/baserion/players/male
+	cp $(QUAKE2_DIR)/baserion/pak0.pak							 	 $(QUAKE2DATADIR)/baserion/pak0.pak                         
+	cp $(QUAKE2_DIR)/baserion/pak1.pak                                 $(QUAKE2DATADIR)/baserion/pak1.pak                         
+	cp $(QUAKE2_DIR)/baserion/pak2.pak                                 $(QUAKE2DATADIR)/baserion/pak2.pak                         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/a_grenades.md2            $(QUAKE2DATADIR)/baserion/players/cyborg/a_grenades.md2    
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_bfg.md2                 $(QUAKE2DATADIR)/baserion/players/cyborg/w_bfg.md2         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_blaster.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_blaster.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_chainfist.md2           $(QUAKE2DATADIR)/baserion/players/cyborg/w_chainfist.md2   
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_chaingun.md2            $(QUAKE2DATADIR)/baserion/players/cyborg/w_chaingun.md2    
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_disrupt.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_disrupt.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_etfrifle.md2            $(QUAKE2DATADIR)/baserion/players/cyborg/w_etfrifle.md2    
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_glauncher.md2           $(QUAKE2DATADIR)/baserion/players/cyborg/w_glauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_grapple.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_grapple.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_hyperblaster.md2        $(QUAKE2DATADIR)/baserion/players/cyborg/w_hyperblaster.md2
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_machinegun.md2          $(QUAKE2DATADIR)/baserion/players/cyborg/w_machinegun.md2  
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_phalanx.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_phalanx.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_plasma.md2              $(QUAKE2DATADIR)/baserion/players/cyborg/w_plasma.md2      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_plauncher.md2           $(QUAKE2DATADIR)/baserion/players/cyborg/w_plauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_railgun.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_railgun.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_ripper.md2              $(QUAKE2DATADIR)/baserion/players/cyborg/w_ripper.md2      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_rlauncher.md2           $(QUAKE2DATADIR)/baserion/players/cyborg/w_rlauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_shotgun.md2             $(QUAKE2DATADIR)/baserion/players/cyborg/w_shotgun.md2     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/w_sshotgun.md2            $(QUAKE2DATADIR)/baserion/players/cyborg/w_sshotgun.md2    
+	cp $(QUAKE2_DIR)/baserion/players/female/a_grenades.md2            $(QUAKE2DATADIR)/baserion/players/female/a_grenades.md2    
+	cp $(QUAKE2_DIR)/baserion/players/female/w_bfg.md2                 $(QUAKE2DATADIR)/baserion/players/female/w_bfg.md2         
+	cp $(QUAKE2_DIR)/baserion/players/female/w_blaster.md2             $(QUAKE2DATADIR)/baserion/players/female/w_blaster.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_chainfist.md2           $(QUAKE2DATADIR)/baserion/players/female/w_chainfist.md2   
+	cp $(QUAKE2_DIR)/baserion/players/female/w_chaingun.md2            $(QUAKE2DATADIR)/baserion/players/female/w_chaingun.md2    
+	cp $(QUAKE2_DIR)/baserion/players/female/w_disrupt.md2             $(QUAKE2DATADIR)/baserion/players/female/w_disrupt.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_etfrifle.md2            $(QUAKE2DATADIR)/baserion/players/female/w_etfrifle.md2    
+	cp $(QUAKE2_DIR)/baserion/players/female/w_glauncher.md2           $(QUAKE2DATADIR)/baserion/players/female/w_glauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/female/w_grapple.md2             $(QUAKE2DATADIR)/baserion/players/female/w_grapple.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_hyperblaster.md2        $(QUAKE2DATADIR)/baserion/players/female/w_hyperblaster.md2
+	cp $(QUAKE2_DIR)/baserion/players/female/w_machinegun.md2          $(QUAKE2DATADIR)/baserion/players/female/w_machinegun.md2  
+	cp $(QUAKE2_DIR)/baserion/players/female/w_phalanx.md2             $(QUAKE2DATADIR)/baserion/players/female/w_phalanx.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_plasma.md2              $(QUAKE2DATADIR)/baserion/players/female/w_plasma.md2      
+	cp $(QUAKE2_DIR)/baserion/players/female/w_plauncher.md2           $(QUAKE2DATADIR)/baserion/players/female/w_plauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/female/w_railgun.md2             $(QUAKE2DATADIR)/baserion/players/female/w_railgun.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_ripper.md2              $(QUAKE2DATADIR)/baserion/players/female/w_ripper.md2      
+	cp $(QUAKE2_DIR)/baserion/players/female/w_rlauncher.md2           $(QUAKE2DATADIR)/baserion/players/female/w_rlauncher.md2   
+	cp $(QUAKE2_DIR)/baserion/players/female/w_shotgun.md2             $(QUAKE2DATADIR)/baserion/players/female/w_shotgun.md2     
+	cp $(QUAKE2_DIR)/baserion/players/female/w_sshotgun.md2            $(QUAKE2DATADIR)/baserion/players/female/w_sshotgun.md2    
+	cp $(QUAKE2_DIR)/baserion/players/male/a_grenades.md2              $(QUAKE2DATADIR)/baserion/players/male/a_grenades.md2      
+	cp $(QUAKE2_DIR)/baserion/players/male/w_bfg.md2                   $(QUAKE2DATADIR)/baserion/players/male/w_bfg.md2           
+	cp $(QUAKE2_DIR)/baserion/players/male/w_blaster.md2               $(QUAKE2DATADIR)/baserion/players/male/w_blaster.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_chainfist.md2             $(QUAKE2DATADIR)/baserion/players/male/w_chainfist.md2     
+	cp $(QUAKE2_DIR)/baserion/players/male/w_chaingun.md2              $(QUAKE2DATADIR)/baserion/players/male/w_chaingun.md2      
+	cp $(QUAKE2_DIR)/baserion/players/male/w_disrupt.md2               $(QUAKE2DATADIR)/baserion/players/male/w_disrupt.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_etfrifle.md2              $(QUAKE2DATADIR)/baserion/players/male/w_etfrifle.md2      
+	cp $(QUAKE2_DIR)/baserion/players/male/w_glauncher.md2             $(QUAKE2DATADIR)/baserion/players/male/w_glauncher.md2     
+	cp $(QUAKE2_DIR)/baserion/players/male/w_grapple.md2               $(QUAKE2DATADIR)/baserion/players/male/w_grapple.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_hyperblaster.md2          $(QUAKE2DATADIR)/baserion/players/male/w_hyperblaster.md2  
+	cp $(QUAKE2_DIR)/baserion/players/male/w_machinegun.md2            $(QUAKE2DATADIR)/baserion/players/male/w_machinegun.md2    
+	cp $(QUAKE2_DIR)/baserion/players/male/w_phalanx.md2               $(QUAKE2DATADIR)/baserion/players/male/w_phalanx.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_plasma.md2                $(QUAKE2DATADIR)/baserion/players/male/w_plasma.md2        
+	cp $(QUAKE2_DIR)/baserion/players/male/w_plauncher.md2             $(QUAKE2DATADIR)/baserion/players/male/w_plauncher.md2     
+	cp $(QUAKE2_DIR)/baserion/players/male/w_railgun.md2               $(QUAKE2DATADIR)/baserion/players/male/w_railgun.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_ripper.md2                $(QUAKE2DATADIR)/baserion/players/male/w_ripper.md2        
+	cp $(QUAKE2_DIR)/baserion/players/male/w_rlauncher.md2             $(QUAKE2DATADIR)/baserion/players/male/w_rlauncher.md2     
+	cp $(QUAKE2_DIR)/baserion/players/male/w_shotgun.md2               $(QUAKE2DATADIR)/baserion/players/male/w_shotgun.md2       
+	cp $(QUAKE2_DIR)/baserion/players/male/w_sshotgun.md2              $(QUAKE2DATADIR)/baserion/players/male/w_sshotgun.md2      
+	cp $(QUAKE2_DIR)/baserion/players/female/athena.pcx                $(QUAKE2DATADIR)/baserion/players/female/athena.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/female/athena_i.pcx              $(QUAKE2DATADIR)/baserion/players/female/athena_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/brianna.pcx               $(QUAKE2DATADIR)/baserion/players/female/brianna.pcx       
+	cp $(QUAKE2_DIR)/baserion/players/female/brianna_i.pcx             $(QUAKE2DATADIR)/baserion/players/female/brianna_i.pcx     
+	cp $(QUAKE2_DIR)/baserion/players/female/cobalt.pcx                $(QUAKE2DATADIR)/baserion/players/female/cobalt.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/female/cobalt_i.pcx              $(QUAKE2DATADIR)/baserion/players/female/cobalt_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/ensign.pcx                $(QUAKE2DATADIR)/baserion/players/female/ensign.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/female/ensign_i.pcx              $(QUAKE2DATADIR)/baserion/players/female/ensign_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/jezebel.pcx               $(QUAKE2DATADIR)/baserion/players/female/jezebel.pcx       
+	cp $(QUAKE2_DIR)/baserion/players/female/jezebel_i.pcx             $(QUAKE2DATADIR)/baserion/players/female/jezebel_i.pcx     
+	cp $(QUAKE2_DIR)/baserion/players/female/jungle.pcx                $(QUAKE2DATADIR)/baserion/players/female/jungle.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/female/jungle_i.pcx              $(QUAKE2DATADIR)/baserion/players/female/jungle_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/lotus.pcx                 $(QUAKE2DATADIR)/baserion/players/female/lotus.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/female/lotus_i.pcx               $(QUAKE2DATADIR)/baserion/players/female/lotus_i.pcx       
+	cp $(QUAKE2_DIR)/baserion/players/female/stiletto.pcx              $(QUAKE2DATADIR)/baserion/players/female/stiletto.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/stiletto_i.pcx            $(QUAKE2DATADIR)/baserion/players/female/stiletto_i.pcx    
+	cp $(QUAKE2_DIR)/baserion/players/female/tris.md2                  $(QUAKE2DATADIR)/baserion/players/female/tris.md2          
+	cp $(QUAKE2_DIR)/baserion/players/female/venus.pcx                 $(QUAKE2DATADIR)/baserion/players/female/venus.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/female/venus_i.pcx               $(QUAKE2DATADIR)/baserion/players/female/venus_i.pcx       
+	cp $(QUAKE2_DIR)/baserion/players/female/voodoo.pcx                $(QUAKE2DATADIR)/baserion/players/female/voodoo.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/female/voodoo_i.pcx              $(QUAKE2DATADIR)/baserion/players/female/voodoo_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/female/weapon.md2                $(QUAKE2DATADIR)/baserion/players/female/weapon.md2        
+	cp $(QUAKE2_DIR)/baserion/players/female/weapon.pcx                $(QUAKE2DATADIR)/baserion/players/female/weapon.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/cipher.pcx                  $(QUAKE2DATADIR)/baserion/players/male/cipher.pcx          
+	cp $(QUAKE2_DIR)/baserion/players/male/cipher_i.pcx                $(QUAKE2DATADIR)/baserion/players/male/cipher_i.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/claymore.pcx                $(QUAKE2DATADIR)/baserion/players/male/claymore.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/claymore_i.pcx              $(QUAKE2DATADIR)/baserion/players/male/claymore_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/male/flak.pcx                    $(QUAKE2DATADIR)/baserion/players/male/flak.pcx            
+	cp $(QUAKE2_DIR)/baserion/players/male/flak_i.pcx                  $(QUAKE2DATADIR)/baserion/players/male/flak_i.pcx          
+	cp $(QUAKE2_DIR)/baserion/players/male/grunt.pcx                   $(QUAKE2DATADIR)/baserion/players/male/grunt.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/grunt_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/grunt_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/howitzer.pcx                $(QUAKE2DATADIR)/baserion/players/male/howitzer.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/howitzer_i.pcx              $(QUAKE2DATADIR)/baserion/players/male/howitzer_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/male/major.pcx                   $(QUAKE2DATADIR)/baserion/players/male/major.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/major_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/major_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/nightops.pcx                $(QUAKE2DATADIR)/baserion/players/male/nightops.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/nightops_i.pcx              $(QUAKE2DATADIR)/baserion/players/male/nightops_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/male/pointman.pcx                $(QUAKE2DATADIR)/baserion/players/male/pointman.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/pointman_i.pcx              $(QUAKE2DATADIR)/baserion/players/male/pointman_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/male/psycho.pcx                  $(QUAKE2DATADIR)/baserion/players/male/psycho.pcx          
+	cp $(QUAKE2_DIR)/baserion/players/male/psycho_i.pcx                $(QUAKE2DATADIR)/baserion/players/male/psycho_i.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/rampage.pcx                 $(QUAKE2DATADIR)/baserion/players/male/rampage.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/rampage_i.pcx               $(QUAKE2DATADIR)/baserion/players/male/rampage_i.pcx       
+	cp $(QUAKE2_DIR)/baserion/players/male/razor.pcx                   $(QUAKE2DATADIR)/baserion/players/male/razor.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/razor_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/razor_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/recon.pcx                   $(QUAKE2DATADIR)/baserion/players/male/recon.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/recon_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/recon_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/scout.pcx                   $(QUAKE2DATADIR)/baserion/players/male/scout.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/scout_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/scout_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/sniper.pcx                  $(QUAKE2DATADIR)/baserion/players/male/sniper.pcx          
+	cp $(QUAKE2_DIR)/baserion/players/male/sniper_i.pcx                $(QUAKE2DATADIR)/baserion/players/male/sniper_i.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/male/tris.md2                    $(QUAKE2DATADIR)/baserion/players/male/tris.md2            
+	cp $(QUAKE2_DIR)/baserion/players/male/viper.pcx                   $(QUAKE2DATADIR)/baserion/players/male/viper.pcx           
+	cp $(QUAKE2_DIR)/baserion/players/male/viper_i.pcx                 $(QUAKE2DATADIR)/baserion/players/male/viper_i.pcx         
+	cp $(QUAKE2_DIR)/baserion/players/male/weapon.md2                  $(QUAKE2DATADIR)/baserion/players/male/weapon.md2          
+	cp $(QUAKE2_DIR)/baserion/players/male/weapon.pcx                  $(QUAKE2DATADIR)/baserion/players/male/weapon.pcx          
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/bump1.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/bump1.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/death1.wav                $(QUAKE2DATADIR)/baserion/players/cyborg/death1.wav        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/death2.wav                $(QUAKE2DATADIR)/baserion/players/cyborg/death2.wav        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/death3.wav                $(QUAKE2DATADIR)/baserion/players/cyborg/death3.wav        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/death4.wav                $(QUAKE2DATADIR)/baserion/players/cyborg/death4.wav        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/drown1.wav                $(QUAKE2DATADIR)/baserion/players/cyborg/drown1.wav        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/fall1.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/fall1.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/fall2.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/fall2.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/gurp1.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/gurp1.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/gurp2.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/gurp2.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/jump1.wav                 $(QUAKE2DATADIR)/baserion/players/cyborg/jump1.wav         
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/oni911.pcx                $(QUAKE2DATADIR)/baserion/players/cyborg/oni911.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/oni911_i.pcx              $(QUAKE2DATADIR)/baserion/players/cyborg/oni911_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain100_1.wav             $(QUAKE2DATADIR)/baserion/players/cyborg/pain100_1.wav     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain100_2.wav             $(QUAKE2DATADIR)/baserion/players/cyborg/pain100_2.wav     
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain25_1.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain25_1.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain25_2.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain25_2.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain50_1.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain50_1.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain50_2.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain50_2.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain75_1.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain75_1.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/pain75_2.wav              $(QUAKE2DATADIR)/baserion/players/cyborg/pain75_2.wav      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/ps9000.pcx                $(QUAKE2DATADIR)/baserion/players/cyborg/ps9000.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/ps9000_i.pcx              $(QUAKE2DATADIR)/baserion/players/cyborg/ps9000_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/tris.md2                  $(QUAKE2DATADIR)/baserion/players/cyborg/tris.md2          
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/tyr574.pcx                $(QUAKE2DATADIR)/baserion/players/cyborg/tyr574.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/tyr574_i.pcx              $(QUAKE2DATADIR)/baserion/players/cyborg/tyr574_i.pcx      
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/weapon.md2                $(QUAKE2DATADIR)/baserion/players/cyborg/weapon.md2        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/weapon.pcx                $(QUAKE2DATADIR)/baserion/players/cyborg/weapon.pcx        
+	cp $(QUAKE2_DIR)/baserion/players/cyborg/weapon.pcx.pcx            $(QUAKE2DATADIR)/baserion/players/cyborg/weapon.pcx.pcx    
 	cp -r $(QUAKE2_DIR)/docs $(QUAKE2DATADIR)/docs
 	cp $< $(RPMROOT)/SPECS/.
 	cd $(RPMROOT)/SPECS; $(RPM) $(RPMFLAGS) $<
@@ -2480,19 +2480,19 @@ QUAKE2VIDEODIR = $(TMPDIR)/quake2-video-$(VERSION)/$(INSTALLDIR)
 rpm-quake2-video: quake2-video.spec
 	touch $(RPMROOT)/SOURCES/quake2-video-$(VERSION).tar.gz
 	if [ ! -d archives ];then mkdir archives;fi
-	-mkdirhier $(QUAKE2VIDEODIR)/baseq2
-	-mkdirhier $(QUAKE2VIDEODIR)/baseq2/video
-	cp $(QUAKE2_DIR)/baseq2/video/end.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou1_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou2_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou3_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou4_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou5_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou6_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou7_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/eou8_.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/idlog.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
-	cp $(QUAKE2_DIR)/baseq2/video/ntro.cin		$(QUAKE2VIDEODIR)/baseq2/video/.
+	-mkdirhier $(QUAKE2VIDEODIR)/baserion
+	-mkdirhier $(QUAKE2VIDEODIR)/baserion/video
+	cp $(QUAKE2_DIR)/baserion/video/end.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou1_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou2_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou3_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou4_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou5_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou6_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou7_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/eou8_.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/idlog.cin		$(QUAKE2VIDEODIR)/baserion/video/.
+	cp $(QUAKE2_DIR)/baserion/video/ntro.cin		$(QUAKE2VIDEODIR)/baserion/video/.
 	cp $< $(RPMROOT)/SPECS/.
 	cd $(RPMROOT)/SPECS; $(RPM) $(RPMFLAGS) $<
 	rm -rf $(TMPDIR)/quake2-video-$(VERSION)
@@ -2599,12 +2599,12 @@ copyfiles:
 	-mkdirhier $(COPYDIR)
 	cp $(BUILD_RELEASE_DIR)/quake2 $(COPYDIR)/quake2
 	strip $(COPYDIR)/quake2
-	-mkdir $(COPYDIR)/baseq2
-#	cp -R $(VWEP_DIR)/baseq2 $(COPYDIR)/.
-#	for x in `find $(COPYDIR)/baseq2 -type d`; do chmod 755 $$x;done
-#	for x in `find $(COPYDIR)/baseq2 -type f`; do chmod 644 $$x;done
-	chmod 1777 $(COPYDIR)/baseq2
-	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(COPYDIR)/baseq2
+	-mkdir $(COPYDIR)/baserion
+#	cp -R $(VWEP_DIR)/baserion $(COPYDIR)/.
+#	for x in `find $(COPYDIR)/baserion -type d`; do chmod 755 $$x;done
+#	for x in `find $(COPYDIR)/baserion -type f`; do chmod 644 $$x;done
+	chmod 1777 $(COPYDIR)/baserion
+	cp $(BUILD_RELEASE_DIR)/game$(ARCH).$(SHLIBEXT) $(COPYDIR)/baserion
 	cp $(BUILD_RELEASE_DIR)/ref_soft.$(SHLIBEXT)  $(COPYDIR)
 	cp $(BUILD_RELEASE_DIR)/ref_softx.$(SHLIBEXT) $(COPYDIR)
 	cp $(BUILD_RELEASE_DIR)/ref_gl.$(SHLIBEXT) $(COPYDIR)

@@ -1897,8 +1897,8 @@ void actor_files ()
 					}
 				}
 				
-				// Search in baseq2 for external file
-				sprintf(filename,"%s/baseq2/sound/%s%s",basedir->string,path,wavname[j]);
+				// Search in baserion for external file
+				sprintf(filename,"%s/baserion/sound/%s%s",basedir->string,path,wavname[j]);
 				f = fopen(filename,"r");
 				if(f) {
 					fclose(f);
@@ -1908,9 +1908,9 @@ void actor_files ()
 					continue;
 				}
 				
-				// Search paks in baseq2
+				// Search paks in baserion
 				sprintf(filename,"sound/%s%s",path,wavname[j]);
-				if (InPak(basedir->string,"baseq2",filename)) {
+				if (InPak(basedir->string,"baserion",filename)) {
 					strcpy(filename,path);
 					strcat(filename,wavname[j]);
 					e->actor_sound_index[j] = gi.soundindex(filename);
@@ -1919,7 +1919,7 @@ void actor_files ()
 
 				if(strlen(cddir->string)) {
 					// Search in cddir (minimal installation)
-					sprintf(filename,"%s/baseq2/sound/%s%s",cddir->string,path,wavname[j]);
+					sprintf(filename,"%s/baserion/sound/%s%s",cddir->string,path,wavname[j]);
 					f = fopen(filename,"r");
 					if(f) {
 						fclose(f);
@@ -1929,9 +1929,9 @@ void actor_files ()
 						continue;
 					}
 					
-					// Search paks in baseq2
+					// Search paks in baserion
 					sprintf(filename,"sound/%s%s",path,wavname[j]);
-					if (InPak(cddir->string,"baseq2",filename)) {
+					if (InPak(cddir->string,"baserion",filename)) {
 						strcpy(filename,path);
 						strcat(filename,wavname[j]);
 						e->actor_sound_index[j] = gi.soundindex(filename);
@@ -1998,8 +1998,8 @@ void actor_files ()
 				}
 			}
 				
-			// Search in baseq2 for external file
-			sprintf(path,"%s/baseq2/%s",basedir->string,filename);
+			// Search in baserion for external file
+			sprintf(path,"%s/baserion/%s",basedir->string,filename);
 			f = fopen(path,"r");
 			if(f) {
 				fclose(f);
@@ -2007,15 +2007,15 @@ void actor_files ()
 				continue;
 			}
 			
-			// Search paks in baseq2
-			if (InPak(basedir->string,"baseq2",filename)) {
+			// Search paks in baserion
+			if (InPak(basedir->string,"baserion",filename)) {
 				e->actor_model_index[k] = gi.modelindex(filename);
 				continue;
 			}
 
 			if(strlen(cddir->string)) {
 				// Search CD for minimal installations
-				sprintf(path,"%s/baseq2/%s",cddir->string,filename);
+				sprintf(path,"%s/baserion/%s",cddir->string,filename);
 				f = fopen(path,"r");
 				if(f) {
 					fclose(f);
@@ -2023,8 +2023,8 @@ void actor_files ()
 					continue;
 				}
 				
-				// Search paks in baseq2
-				if (InPak(cddir->string,"baseq2",filename)) {
+				// Search paks in baserion
+				if (InPak(cddir->string,"baserion",filename)) {
 					e->actor_model_index[k] = gi.modelindex(filename);
 					continue;
 				}
@@ -2051,8 +2051,8 @@ void actor_files ()
 				}
 			}
 				
-			// Search in baseq2 for external file
-			sprintf(path,"%s/baseq2/%s",basedir->string,filename);
+			// Search in baserion for external file
+			sprintf(path,"%s/baserion/%s",basedir->string,filename);
 			f = fopen(path,"r");
 			if(f) {
 				fclose(f);
@@ -2060,15 +2060,15 @@ void actor_files ()
 				continue;
 			}
 			
-			// Search paks in baseq2
-			if (InPak(basedir->string,"baseq2",filename)) {
+			// Search paks in baserion
+			if (InPak(basedir->string,"baserion",filename)) {
 				e->actor_model_index[k] = gi.modelindex(filename);
 				continue;
 			}
 
 			if(strlen(cddir->string)) {
 				// Search CD for minimal installations
-				sprintf(path,"%s/baseq2/%s",cddir->string,filename);
+				sprintf(path,"%s/baserion/%s",cddir->string,filename);
 				f = fopen(path,"r");
 				if(f) {
 					fclose(f);
@@ -2076,8 +2076,8 @@ void actor_files ()
 					continue;
 				}
 				
-				// Search paks in baseq2
-				if (InPak(cddir->string,"baseq2",filename)) {
+				// Search paks in baserion
+				if (InPak(cddir->string,"baserion",filename)) {
 					e->actor_model_index[k] = gi.modelindex(filename);
 					continue;
 				}

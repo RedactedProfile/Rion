@@ -23,7 +23,7 @@
 #define MAX_MD2SKINS	32
 #define MAX_SKINNAME	64
 
-// Argh! - loads id baseq2/player models, "patches" their skin links 
+// Argh! - loads id baserion/player models, "patches" their skin links 
 //         for misc_actor (all id skins, and slots for 10 custom 
 //         skins), and saves them to the current moddir location
 //
@@ -45,7 +45,7 @@ int PatchPlayerModels (char *modelname)
 	// get game (moddir) name
 	game = gi.cvar("game", "", 0);
 	if (!*game->string)
-		return 0;	// we're in baseq2
+		return 0;	// we're in baserion
 
 	sprintf (outfilename, "%s/players/%s/tris.md2", game->string, modelname);
 	if ((outfile = fopen (outfilename, "rb")))
@@ -110,7 +110,7 @@ int PatchPlayerModels (char *modelname)
 	numskins = 32;
 
 	// load original player model
-	sprintf (infilename, "baseq2/players/%s/tris.md2", modelname);
+	sprintf (infilename, "baserion/players/%s/tris.md2", modelname);
 	if ( !(infile = fopen (infilename, "rb")) )
 		return 0;	// no player model (this shouldn't happen)
 	

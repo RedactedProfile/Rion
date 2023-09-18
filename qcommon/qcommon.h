@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define VKQUAKE2_VERSION "1.5.9"
 
-#define	BASEDIRNAME	"baseq2"
+#define	BASEDIRNAME	"baserion"
 
 #ifdef WIN32
 

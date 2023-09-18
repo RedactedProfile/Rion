@@ -1084,7 +1084,7 @@ int PatchMonsterModel (char *modelname)
 	// get game (moddir) name
 	gamedir = gi.cvar("game", "", 0);
 	if (!*gamedir->string)
-		return 0;	// we're in baseq2
+		return 0;	// we're in baserion
 
 	sprintf (outfilename, "%s/%s", gamedir->string, modelname);
 	if (outfile = fopen (outfilename, "rb"))
@@ -1235,7 +1235,7 @@ int PatchMonsterModel (char *modelname)
 	}
 
 	// load original model
-	sprintf (infilename, "baseq2/%s", modelname);
+	sprintf (infilename, "baserion/%s", modelname);
 	if ( !(infile = fopen (infilename, "rb")) )
 	{
 		// If file doesn't exist on user's hard disk, it must be in 
@@ -1246,14 +1246,14 @@ int PatchMonsterModel (char *modelname)
 		FILE			*fpak;
 		int				k, numitems;
 
-		fpak = fopen("baseq2/pak0.pak","rb");
+		fpak = fopen("baserion/pak0.pak","rb");
 		if (!fpak)
 		{
 			cvar_t	*cddir;
 			char	pakfile[MAX_OSPATH];
 
 			cddir = gi.cvar("cddir", "", 0);
-			sprintf(pakfile,"%s/baseq2/pak0.pak",cddir->string);
+			sprintf(pakfile,"%s/baserion/pak0.pak",cddir->string);
 			fpak = fopen(pakfile,"rb");
 			if (!fpak)
 			{
@@ -1285,7 +1285,7 @@ int PatchMonsterModel (char *modelname)
 		fclose(fpak);
 		if (!data)
 		{
-			gi.dprintf("PatchMonsterModel: Could not find %s in baseq2/pak0.pak\n",modelname);
+			gi.dprintf("PatchMonsterModel: Could not find %s in baserion/pak0.pak\n",modelname);
 			return 0;
 		}
 	}

@@ -240,7 +240,7 @@ void Miniaudio_Play(int track, qboolean looping)
 
 	result = LoadTrack(FS_Gamedir(), track);
 
-	// try the baseq2 folder if loading the track from a custom gamedir failed
+	// try the baserion folder if loading the track from a custom gamedir failed
 	if (result != MA_SUCCESS && Q_stricmp(FS_Gamedir(), "./"BASEDIRNAME) != 0)
 	{
 		result = LoadTrack(BASEDIRNAME, track);

@@ -203,7 +203,7 @@ void InitGame (void)
 	bob_pitch = gi.cvar ("bob_pitch", "0.002", 0);
 	bob_roll = gi.cvar ("bob_roll", "0.002", 0);
 
-	gamedir = gi.cvar ("gamedir", "baseq2", CVAR_SERVERINFO);
+	gamedir = gi.cvar ("gamedir", "baserion", CVAR_SERVERINFO);
 
 	/* others */
 	aimfix = gi.cvar ("aimfix", "0", CVAR_ARCHIVE);

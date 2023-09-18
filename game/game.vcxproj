@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -65,25 +65,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Quake2\baseq2\</OutDir>
+    <OutDir>$(SolutionDir)Quake2\baserion\</OutDir>
     <TargetName>$(ProjectName)x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)x64</TargetName>
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Quake2\baseq2\</OutDir>
+    <OutDir>$(SolutionDir)Quake2\baserion\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Quake2\baseq2\</OutDir>
+    <OutDir>$(SolutionDir)Quake2\baserion\</OutDir>
     <TargetName>$(ProjectName)x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>$(ProjectName)x64</TargetName>
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Quake2\baseq2\</OutDir>
+    <OutDir>$(SolutionDir)Quake2\baserion\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

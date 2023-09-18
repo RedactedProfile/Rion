@@ -867,7 +867,7 @@ void FS_InitFilesystem (void)
 		FS_AddGameDirectory (va("%s/"BASEDIRNAME, fs_cddir->string) );
 
 	//
-	// start up with baseq2 by default
+	// start up with baserion by default
 	//
 	FS_AddGameDirectory (va("%s/"BASEDIRNAME, fs_basedir->string) );
 

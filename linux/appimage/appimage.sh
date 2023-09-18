@@ -20,8 +20,8 @@ cp linux/appimage/icon.png AppDir/usr/share/icons/
 mkdir -p assets/demo
 curl -sSfL https://github.com/kondrak/vkQuake2/releases/download/1.5.9/vkquake2-1.5.9_win64.zip -o assets/vkquake2-1.5.9_win64.zip
 cd assets
-unzip -qq *.zip **/baseq2/players/* **/baseq2/pak0.pak -d .
-cp -r **/baseq2/* demo
+unzip -qq *.zip **/baserion/players/* **/baserion/pak0.pak -d .
+cp -r **/baserion/* demo
 cd -
 cp -r assets/demo AppDir/usr/bin/
 

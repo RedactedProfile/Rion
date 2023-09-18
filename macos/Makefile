@@ -39,7 +39,7 @@ help:
 
 TARGETS=$(BUILDDIR)/quake2 \
 	$(BUILDDIR)/q2ded \
-	$(BUILDDIR)/baseq2/game.dylib \
+	$(BUILDDIR)/baserion/game.dylib \
 	$(BUILDDIR)/ctf/game.dylib \
 	$(BUILDDIR)/ref_vk.dylib \
 	$(BUILDDIR)/xatrix/game.dylib \
@@ -49,7 +49,7 @@ TARGETS=$(BUILDDIR)/quake2 \
 
 debug:
 	@-mkdir -p debug \
-		debug/baseq2 \
+		debug/baserion \
 		debug/client \
 		debug/ded \
 		debug/ref_vk \
@@ -63,7 +63,7 @@ debug:
 
 release:
 	@-mkdir -p release \
-		release/baseq2 \
+		release/baserion \
 		release/client \
 		release/ded \
 		release/ref_vk \
@@ -435,7 +435,7 @@ GAME_OBJS = \
 	$(BUILDDIR)/game/p_weapon.o \
 	$(BUILDDIR)/game/q_shared.o
 
-$(BUILDDIR)/baseq2/game.dylib : $(GAME_OBJS)
+$(BUILDDIR)/baserion/game.dylib : $(GAME_OBJS)
 	$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(GAME_OBJS)
 
 $(BUILDDIR)/game/g_ai.o :        ../game/g_ai.c

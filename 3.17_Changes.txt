@@ -29,7 +29,7 @@ Changes for 3.17
 - Linux:  Now correctly reports out of memory rather than segfaulting (mmap
   returns (void *)-1 and not NULL on error).
 - Fixed autodownloading to not create paths for files that can't be downloaded
-  (this was creating many empty directories in baseq2/players).
+  (this was creating many empty directories in baserion/players).
 - When downloading a file from a server that doesn't have it, the message is
   now "Server does not have this file" rather than "File not found."
 - Fixed some coop keys in 3.15 weren't being handled correctly (pyramid key).

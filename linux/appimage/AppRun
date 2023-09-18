@@ -7,12 +7,12 @@ if [ -z ${APPDIR} ]; then
 export APPDIR=$PWD
 fi
 
-cp -r $APPDIR/usr/bin/{baseq2,ctf,rogue,smd,xatrix,zaero} "$VKQUAKE"/
+cp -r $APPDIR/usr/bin/{baserion,ctf,rogue,smd,xatrix,zaero} "$VKQUAKE"/
 
 # create and run dialog
 rcmd=$($APPDIR/usr/bin/yad --form --center --borders=10 --window-icon="$APPDIR/usr/share/icons/vkquake.png" --title="vkQuake 2" --columns=1 --no-buttons --image-on-top \
 --image="$APPDIR/usr/share/icons/vkquake.png" \
---field="  vkQuake2!":fbtn 'bash -c "echo baseq2 ; kill $(pgrep yad)"' \
+--field="  vkQuake2!":fbtn 'bash -c "echo baserion ; kill $(pgrep yad)"' \
 --field="  Demo!":fbtn 'bash -c "echo demo ; kill $(pgrep yad)"' \
 --field="  Capture the Flag!":fbtn 'bash -c "echo ctf ; kill $(pgrep yad)"' \
 --field="  Slight Mechanical Destruction!":fbtn 'bash -c "echo smd ; kill $(pgrep yad)"' \
@@ -33,8 +33,8 @@ cp -a $APPDIR/usr/bin/{quake2,ref_glx.so,ref_vk.so} "$VKQUAKE/"
 
 # run command
 case $rcmd in
-    baseq2)
-    if [ ! -e "$VKQUAKE"/baseq2/pak0.pak ]; then MISSING_FILES; exit; fi
+    baserion)
+    if [ ! -e "$VKQUAKE"/baserion/pak0.pak ]; then MISSING_FILES; exit; fi
     cd "$VKQUAKE" && ./quake2 
     ;;
     ctf)
@@ -58,11 +58,11 @@ case $rcmd in
     cd "$VKQUAKE" && ./quake2 +set game zaero
     ;;
     demo)
-    if [ -e "$VKQUAKE/baseq2/pak0.pak" ]; then exit; fi
-    ln -s $APPDIR/usr/bin/demo/players $VKQUAKE/baseq2
-    ln -s $APPDIR/usr/bin/demo/pak0.pak $VKQUAKE/baseq2
+    if [ -e "$VKQUAKE/baserion/pak0.pak" ]; then exit; fi
+    ln -s $APPDIR/usr/bin/demo/players $VKQUAKE/baserion
+    ln -s $APPDIR/usr/bin/demo/pak0.pak $VKQUAKE/baserion
     cd "$VKQUAKE" && ./quake2
-    for i in "$VKQUAKE"/baseq2/{pak0.pak,players}; do unlink $i; done
+    for i in "$VKQUAKE"/baserion/{pak0.pak,players}; do unlink $i; done
     ;;
     open)
     xdg-open "$VKQUAKE"
