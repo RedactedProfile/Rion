@@ -59,7 +59,7 @@ static qboolean VerifyDriver( void )
 /*
 ** VID_CreateWindow
 */
-#define	WINDOW_CLASS_NAME	"Quake 2"
+#define	WINDOW_CLASS_NAME	"Rion"
 
 qboolean VID_CreateWindow( int width, int height, qboolean fullscreen )
 {
@@ -114,7 +114,7 @@ qboolean VID_CreateWindow( int width, int height, qboolean fullscreen )
 	glw_state.hWnd = CreateWindowEx (
 		 exstyle, 
 		 WINDOW_CLASS_NAME,
-		 "Quake 2 (OpenGL) "CPUSTRING,
+		 "Rion (OpenGL) "CPUSTRING,
 		 stylebits,
 		 x, y, w, h,
 		 NULL,

@@ -45,7 +45,7 @@ extern cvar_t *vid_ref;
 /*
 ** VID_CreateWindow
 */
-#define	WINDOW_CLASS_NAME	"Quake 2"
+#define	WINDOW_CLASS_NAME	"Rion"
 
 qboolean VID_CreateWindow( int width, int height, qboolean fullscreen )
 {
@@ -100,7 +100,7 @@ qboolean VID_CreateWindow( int width, int height, qboolean fullscreen )
 	vkw_state.hWnd = CreateWindowEx (
 		 exstyle, 
 		 WINDOW_CLASS_NAME,
-		 "Quake 2 (Vulkan) "CPUSTRING,
+		 "Rion (Vulkan) "CPUSTRING,
 		 stylebits,
 		 x, y, w, h,
 		 NULL,
