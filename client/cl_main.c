@@ -1355,7 +1355,7 @@ void CL_RequestNextDownload (void)
 			while (precache_tex < numtexinfo) {
 				char fn[MAX_OSPATH];
 
-				sprintf(fn, "textures/%s.wal", map_surfaces[precache_tex++].rname);
+				sprintf(fn, "textures/%s.tga", map_surfaces[precache_tex++].rname);
 				if (!CL_CheckOrDownloadFile(fn))
 					return; // started a download
 			}
