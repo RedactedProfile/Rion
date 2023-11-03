@@ -876,6 +876,7 @@ lighting range
 */
 void GL_LightScaleTexture (unsigned *in, int inwidth, int inheight, qboolean only_gamma )
 {
+	return;
 	if ( only_gamma )
 	{
 		int		i, c;

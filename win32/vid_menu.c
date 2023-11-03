@@ -315,7 +315,7 @@ void VID_MenuInit( void )
 	};
 	static const char *refs[] =
 	{
-		"[software      ]",
+		//"[software      ]",
 		"[default OpenGL]",
 		"[Vulkan        ]",
 		"[3Dfx OpenGL   ]",
