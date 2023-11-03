@@ -20,33 +20,33 @@ jobs:
         with:
           version: $VK_VERSION
           cache: true
-      - name: Build vkQuake2 Debug (x64)
-        run: msbuild quake2.sln /m /t:Rebuild /p:Configuration=Debug /p:Platform=x64
-      - name: Upload vkQuake2 Debug (x64) artifacts
+      - name: Build Rion Debug (x64)
+        run: msbuild rion.sln /m /t:Rebuild /p:Configuration=Debug /p:Platform=x64
+      - name: Upload Rion Debug (x64) artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: vkQuake2-Windows-debug-x64
+          name: Rion-Windows-debug-x64
           path: |
-            Quake2
-            !Quake2/**/*.obj
-            !Quake2/**/*.exp
-            !Quake2/**/*.ilk
-            !Quake2/**/*.lib
-            !Quake2/**/*.pdb
-            !Quake2/**/*.iobj
-            !Quake2/**/*.ipdb
-      - name: Build vkQuake2 Release (x64)
-        run: msbuild quake2.sln /m /t:Rebuild /p:Configuration=Release /p:Platform=x64
-      - name: Upload vkQuake2 Release (x64) artifacts
+            Rion
+            !Rion/**/*.obj
+            !Rion/**/*.exp
+            !Rion/**/*.ilk
+            !Rion/**/*.lib
+            !Rion/**/*.pdb
+            !Rion/**/*.iobj
+            !Rion/**/*.ipdb
+      - name: Build Rion Release (x64)
+        run: msbuild rion.sln /m /t:Rebuild /p:Configuration=Release /p:Platform=x64
+      - name: Upload Rion Release (x64) artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: vkQuake2-Windows-release-x64
+          name: Rion-Windows-release-x64
           path: |
-            Quake2
-            !Quake2/**/*.obj
-            !Quake2/**/*.exp
-            !Quake2/**/*.ilk
-            !Quake2/**/*.lib
+            Rion
+            !Rion/**/*.obj
+            !Rion/**/*.exp
+            !Rion/**/*.ilk
+            !Rion/**/*.lib
             !Quake2/**/*.pdb
             !Quake2/**/*.iobj
             !Quake2/**/*.ipdb
