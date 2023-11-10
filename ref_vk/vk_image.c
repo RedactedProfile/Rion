@@ -1370,6 +1370,21 @@ uint32_t Vk_Upload8 (byte *data, int width, int height,  qboolean mipmap, qboole
 }
 
 
+void flip(unsigned* buffer, unsigned width, unsigned height)
+{
+	unsigned rows = height / 2; // Iterate only half the buffer to get a full flip
+	unsigned* tempRow = (unsigned*)malloc(width * sizeof(unsigned));
+
+	for (unsigned rowIndex = 0; rowIndex < rows; rowIndex++)
+	{
+		memcpy(tempRow, buffer + rowIndex * width, width * sizeof(unsigned));
+		memcpy(buffer + rowIndex * width, buffer + (height - rowIndex - 1) * width, width * sizeof(unsigned));
+		memcpy(buffer + (height - rowIndex - 1) * width, tempRow, width * sizeof(unsigned));
+	}
+
+	free(tempRow);
+}
+
 /*
 ================
 Vk_LoadPic
@@ -1473,6 +1488,10 @@ image_t *Vk_LoadPic (char *name, byte *pic, int width, int height, imagetype_t t
 		image->tl = 0;
 		image->th = 1;
 
+		if (image->type == it_wall) {
+			flip(texBuffer, width, height);
+		}
+		
 		QVk_CreateTexture(&image->vk_texture, (unsigned char*)texBuffer, image->upload_width, image->upload_height, samplerType ? *samplerType : vk_current_sampler);
 		QVk_DebugSetObjectName((uint64_t)image->vk_texture.image, VK_OBJECT_TYPE_IMAGE, va("Image: %s", name));
 		QVk_DebugSetObjectName((uint64_t)image->vk_texture.imageView, VK_OBJECT_TYPE_IMAGE_VIEW, va("Image View: %s", name));

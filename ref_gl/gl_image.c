@@ -1237,6 +1237,20 @@ qboolean GL_Upload8 (byte *data, int width, int height,  qboolean mipmap, qboole
     return true;
 }
 
+void flip(unsigned* buffer, unsigned width, unsigned height)
+{
+	unsigned rows = height / 2; // Iterate only half the buffer to get a full flip
+	unsigned* tempRow = (unsigned*)malloc(width * sizeof(unsigned));
+
+	for (unsigned rowIndex = 0; rowIndex < rows; rowIndex++)
+	{
+		memcpy(tempRow, buffer + rowIndex * width, width * sizeof(unsigned));
+		memcpy(buffer + rowIndex * width, buffer + (height - rowIndex - 1) * width, width * sizeof(unsigned));
+		memcpy(buffer + (height - rowIndex - 1) * width, tempRow, width * sizeof(unsigned));
+	}
+
+	free(tempRow);
+}
 
 /*
 ================
@@ -1308,6 +1322,11 @@ nonscrap:
 		image->scrap = false;
 		image->texnum = TEXNUM_IMAGES + (image - gltextures);
 		GL_Bind(image->texnum);
+
+		if (image->type == it_wall) {
+			flip(pic, width, height);
+		}
+
 		if (bits == 8)
 			image->has_alpha = GL_Upload8 (pic, width, height, (image->type != it_pic && image->type != it_sky), image->type == it_sky );
 		else
