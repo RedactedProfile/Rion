@@ -1010,6 +1010,35 @@ void SP_misc_explobox (edict_t *self)
 	gi.linkentity (self);
 }
 
+void SP_misc_devtest(edict_t* self)
+{
+	self->solid = SOLID_BBOX;
+	self->movetype = MOVETYPE_STEP;
+
+	self->model = "models/objects/test/tris.md2";
+	self->s.modelindex = gi.modelindex(self->model);
+	VectorSet(self->mins, -16, -16, 0);
+	VectorSet(self->maxs, 16, 16, 40);
+
+	if (!self->mass)
+		self->mass = 400;
+	if (!self->health)
+		self->health = 10;
+	if (!self->dmg)
+		self->dmg = 150;
+
+	self->die = barrel_delay;
+	self->takedamage = DAMAGE_YES;
+	self->monsterinfo.aiflags = AI_NOSTEP;
+
+	self->touch = barrel_touch;
+
+	self->think = M_droptofloor;
+	self->nextthink = level.time + 2 * FRAMETIME;
+
+	gi.linkentity(self);
+}
+
 
 //
 // miscellaneous specialty items

@@ -97,6 +97,7 @@ void SP_path_corner (edict_t *self);
 void SP_point_combat (edict_t *self);
 
 void SP_misc_explobox (edict_t *self);
+void SP_misc_devtest(edict_t* self);
 void SP_misc_banner (edict_t *self);
 void SP_misc_satellite_dish (edict_t *self);
 void SP_misc_actor (edict_t *self);
@@ -217,6 +218,7 @@ spawn_t	spawns[] = {
 	{"point_combat", SP_point_combat},
 
 	{"misc_explobox", SP_misc_explobox},
+	{"misc_devtest", SP_misc_devtest},
 	{"misc_banner", SP_misc_banner},
 	{"misc_satellite_dish", SP_misc_satellite_dish},
 	{"misc_actor", SP_misc_actor},
