@@ -1395,7 +1395,11 @@ This is also used as an entry point for the generated r_notexture
 image_t *Vk_LoadPic (char *name, byte *pic, int width, int height, imagetype_t type, int bits, qvksampler_t *samplerType)
 {
 	image_t		*image;
-	int			i;
+	int			i, len;
+	const char* ext;
+
+	len = (int)strlen(name);
+	ext = name + len - 4;
 
 	// find a free image_t
 	for (i = 0, image = vktextures; i<numvktextures; i++, image++)
@@ -1488,7 +1492,7 @@ image_t *Vk_LoadPic (char *name, byte *pic, int width, int height, imagetype_t t
 		image->tl = 0;
 		image->th = 1;
 
-		if (image->type == it_wall) {
+		if (0 == strcmp(ext, ".tga")) {
 			flip(texBuffer, width, height);
 		}
 		

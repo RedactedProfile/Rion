@@ -1262,7 +1262,11 @@ This is also used as an entry point for the generated r_notexture
 image_t *GL_LoadPic (char *name, byte *pic, int width, int height, imagetype_t type, int bits)
 {
 	image_t		*image;
-	int			i;
+	int			i, len;
+	const char* ext;
+
+	len = (int)strlen(name);
+	ext = name + len - 4;
 
 	// find a free image_t
 	for (i=0, image=gltextures ; i<numgltextures ; i++,image++)
@@ -1323,7 +1327,7 @@ nonscrap:
 		image->texnum = TEXNUM_IMAGES + (image - gltextures);
 		GL_Bind(image->texnum);
 
-		if (image->type == it_wall) {
+		if (0 == strcmp(ext, ".tga")) {
 			flip(pic, width, height);
 		}
 
