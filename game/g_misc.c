@@ -896,7 +896,7 @@ void barrel_explode (edict_t *self)
 	VectorMA (self->absmin, 0.5, self->size, self->s.origin);
 
 	// a few big chunks
-	spd = 1.5 * (float)self->dmg / 200.0;
+	spd = 3.5 * (float)self->dmg / 200.0;
 	org[0] = self->s.origin[0] + crandom() * self->size[0];
 	org[1] = self->s.origin[1] + crandom() * self->size[1];
 	org[2] = self->s.origin[2] + crandom() * self->size[2];
@@ -907,7 +907,7 @@ void barrel_explode (edict_t *self)
 	ThrowDebris (self, "models/objects/debris1/tris.md2", spd, org);
 
 	// bottom corners
-	spd = 1.75 * (float)self->dmg / 200.0;
+	spd = 5.50 * (float)self->dmg / 200.0;
 	VectorCopy (self->absmin, org);
 	ThrowDebris (self, "models/objects/debris3/tris.md2", spd, org);
 	VectorCopy (self->absmin, org);
@@ -922,7 +922,7 @@ void barrel_explode (edict_t *self)
 	ThrowDebris (self, "models/objects/debris3/tris.md2", spd, org);
 
 	// a bunch of little chunks
-	spd = 2 * self->dmg / 200;
+	spd = 6 * self->dmg / 200;
 	org[0] = self->s.origin[0] + crandom() * self->size[0];
 	org[1] = self->s.origin[1] + crandom() * self->size[1];
 	org[2] = self->s.origin[2] + crandom() * self->size[2];
