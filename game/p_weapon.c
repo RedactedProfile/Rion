@@ -836,9 +836,13 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	vec3_t	forward, right;
 	vec3_t	start;
 	vec3_t	offset;
+	vec3_t	v;
+	int shots;
+	float spread;
 
 	if (is_quad)
 		damage *= 4;
+
 	AngleVectors (ent->client->v_angle, forward, right, NULL);
 	VectorSet(offset, 24, 8, ent->viewheight-8);
 	VectorAdd (offset, g_offset, offset);
@@ -847,8 +851,24 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 	VectorScale (forward, -2, ent->client->kick_origin);
 	ent->client->kick_angles[0] = -1;
 
-	fire_blaster (ent, start, forward, damage, 1000, effect, hyper);
+	shots = 3;
+	spread = 5;
+
+	v[PITCH] = ent->client->v_angle[PITCH];
+	v[ROLL] = ent->client->v_angle[ROLL];
 	
+	v[YAW] = ent->client->v_angle[YAW] - 5;
+	AngleVectors(v, forward, NULL, NULL);
+	fire_blaster(ent, start, forward, damage, 1000, effect, hyper); // fire left
+
+	v[YAW] = ent->client->v_angle[YAW];
+	AngleVectors(v, forward, NULL, NULL);
+	fire_blaster (ent, start, forward, damage, 1000, effect, hyper); // fire middle
+
+	v[YAW] = ent->client->v_angle[YAW] + 5;
+	AngleVectors(v, forward, NULL, NULL);
+	fire_blaster(ent, start, forward, damage, 1000, effect, hyper); // fire right
+
 	// send muzzle flash
 	gi.WriteByte (svc_muzzleflash);
 	gi.WriteShort (ent-g_edicts);
@@ -884,9 +904,7 @@ void Weapon_Blaster_Fire (edict_t *ent)
 	VectorAdd(bm, om, bm);
 	VectorAdd(br, or, br);
 
-	Blaster_Fire (ent, bl, damage, false, EF_BLASTER);
-	Blaster_Fire(ent, bm, damage, false, EF_BLASTER);
-	Blaster_Fire(ent, br, damage, false, EF_BLASTER);
+	Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
 	
 	ent->client->ps.gunframe++;
 }
