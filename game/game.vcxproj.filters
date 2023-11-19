@@ -159,6 +159,9 @@
     <ClCompile Include="p_weapon.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="m_placeholder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="game.def">
@@ -242,6 +245,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="m_tank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="m_placeholder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

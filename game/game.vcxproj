@@ -212,6 +212,7 @@
     <ClCompile Include="m_move.c" />
     <ClCompile Include="m_mutant.c" />
     <ClCompile Include="m_parasite.c" />
+    <ClCompile Include="m_placeholder.c" />
     <ClCompile Include="m_soldier.c" />
     <ClCompile Include="m_supertank.c" />
     <ClCompile Include="m_tank.c" />
@@ -246,6 +247,7 @@
     <ClInclude Include="m_medic.h" />
     <ClInclude Include="m_mutant.h" />
     <ClInclude Include="m_parasite.h" />
+    <ClInclude Include="m_placeholder.h" />
     <ClInclude Include="m_player.h" />
     <ClInclude Include="m_rider.h" />
     <ClInclude Include="m_soldier.h" />
