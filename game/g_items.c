@@ -789,6 +789,8 @@ void Touch_Item (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf
 		{
 			if (ent->count == 2)
 				gi.sound(other, CHAN_ITEM, gi.soundindex("items/s_health.wav"), 1, ATTN_NORM, 0);
+			else if (ent->count == 5)
+				gi.sound(other, CHAN_ITEM, gi.soundindex("items/pill-bottle.wav"), 1, ATTN_NORM, 0);
 			else if (ent->count == 10)
 				gi.sound(other, CHAN_ITEM, gi.soundindex("items/n_health.wav"), 1, ATTN_NORM, 0);
 			else if (ent->count == 25)
@@ -2108,7 +2110,7 @@ tank commander's head
 		0,
 		NULL,
 		0,
-/* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav items/m_health.wav"
+/* precache */ "items/s_health.wav items/n_health.wav items/l_health.wav items/m_health.wav items/pill-bottle.wav"
 	},
 
 	// end of list marker
@@ -2130,6 +2132,23 @@ void SP_item_health (edict_t *self)
 	self->count = 10;
 	SpawnItem (self, FindItem ("Health"));
 	gi.soundindex ("items/n_health.wav");
+}
+
+/*QUAKED SP_item_devtesthealth (.3 .3 1) (-16 -16 -16) (16 16 16)
+*/
+void SP_item_devtesthealth(edict_t* self)
+{
+	if (deathmatch->value && ((int)dmflags->value & DF_NO_HEALTH))
+	{
+		G_FreeEdict(self);
+		return;
+	}
+
+	self->model = "models/items/testitem/tris.md2";
+	self->count = 5;
+	SpawnItem(self, FindItem("Health"));
+	self->style = HEALTH_IGNORE_MAX;
+	gi.soundindex("items/pill-bottle.wav");
 }
 
 /*QUAKED item_health_small (.3 .3 1) (-16 -16 -16) (16 16 16)

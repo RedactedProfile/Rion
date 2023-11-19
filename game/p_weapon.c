@@ -885,24 +885,11 @@ void Blaster_Fire (edict_t *ent, vec3_t g_offset, int damage, qboolean hyper, in
 void Weapon_Blaster_Fire (edict_t *ent)
 {
 	int		damage;
-	vec3_t	bl, bm, br, ol, om, or;
-
+	
 	if (deathmatch->value)
 		damage = 15;
 	else
 		damage = 10;
-
-	VectorCopy(vec3_origin, bl);
-	VectorCopy(vec3_origin, bm);
-	VectorCopy(vec3_origin, br);
-	
-	VectorSet(ol, 0, 5, 0);
-	VectorSet(om, 0, 0, 5);
-	VectorSet(or, 0, 5, 0);
-	
-	VectorSubtract(bl, ol, bl);
-	VectorAdd(bm, om, bm);
-	VectorAdd(br, or, br);
 
 	Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
 	

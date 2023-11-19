@@ -26,7 +26,7 @@ typedef struct
 	void	(*spawn)(edict_t *ent);
 } spawn_t;
 
-
+void SP_item_devtesthealth(edict_t* self);
 void SP_item_health (edict_t *self);
 void SP_item_health_small (edict_t *self);
 void SP_item_health_large (edict_t *self);
@@ -148,6 +148,7 @@ void SP_turret_driver (edict_t *self);
 
 spawn_t	spawns[] = {
 	{"item_health", SP_item_health},
+	{"item_dev_testhealth", SP_item_devtesthealth},
 	{"item_health_small", SP_item_health_small},
 	{"item_health_large", SP_item_health_large},
 	{"item_health_mega", SP_item_health_mega},
