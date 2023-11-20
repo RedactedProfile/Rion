@@ -179,12 +179,63 @@ mframe_t placeholder_frames_walk[] =
 	ai_walk, 3, NULL,
 	ai_walk, 4, NULL,
 	ai_walk, 5, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 2, NULL,
 	ai_walk, 6, NULL,
+	ai_walk, 4, NULL,
+	ai_walk, 2, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 5, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 4, NULL,
+	ai_walk, 0, NULL,
+	ai_walk, 3, NULL,
+	ai_walk, 4, NULL,
+	ai_walk, 5, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 2, NULL,
+	ai_walk, 6, NULL,
+	ai_walk, 4, NULL,
+	ai_walk, 2, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 5, NULL,
+	ai_walk, 7, NULL,
+	ai_walk, 4, NULL,
+	ai_walk, 0, NULL
 };
-mmove_t placeholder_move_walk = { FRAME_stand01, FRAME_stand01, placeholder_frames_walk, NULL };
+mmove_t placeholder_move_walk = { FRAME_walk01, FRAME_walk27, placeholder_frames_walk, NULL };
 void placeholder_walk(edict_t* self)
 {
 	self->monsterinfo.currentmove = &placeholder_frames_walk;
+}
+
+mframe_t placeholder_frames_run[] =
+{
+	ai_run, 13, NULL,
+	ai_run, 4,  NULL,
+	ai_run, 4,  NULL,
+	ai_run, 4,  NULL,
+	ai_run, 7, NULL,
+	ai_run, 5, NULL,
+	ai_run, 6, NULL,
+	ai_run, 3,  NULL,
+	ai_run, 13, NULL,
+	ai_run, 4,  NULL,
+	ai_run, 4,  NULL,
+	ai_run, 4,  NULL,
+	ai_run, 7, NULL,
+	ai_run, 5, NULL,
+	ai_run, 6, NULL,
+	ai_run, 3,  NULL,
+	ai_run, 0,  NULL,
+};
+mmove_t placeholder_move_run = { FRAME_run01, FRAME_run17, placeholder_frames_run, NULL };
+void placeholder_run(edict_t* self)
+{
+	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
+		self->monsterinfo.currentmove = &placeholder_move_stand;
+	else
+		self->monsterinfo.currentmove = &placeholder_move_run;
 }
 
 
@@ -222,10 +273,8 @@ mframe_t placeholder_frames_melee[] =
 	ai_stand, 0, NULL, // 28
 	ai_stand, 0, NULL, // 29
 	ai_stand, 0, NULL, // 30
-
-	ai_stand, 0, NULL, // 31
 };
-mmove_t placeholder_move_melee= { FRAME_attak01, FRAME_attak31, placeholder_frames_melee, NULL };
+mmove_t placeholder_move_melee= { FRAME_attak01, FRAME_attak30, placeholder_frames_melee, NULL };
 void placeholder_attack(edict_t* self)
 {
 	if (range(self, self->enemy) == RANGE_MELEE)
@@ -234,7 +283,7 @@ void placeholder_attack(edict_t* self)
 	}
 }
 
-mframe_t placeholder_frames_pain[] =
+mframe_t placeholder_frames_pain1[] =
 {
 	ai_move, 2, NULL,
 	ai_move, 0, NULL,
@@ -243,8 +292,32 @@ mframe_t placeholder_frames_pain[] =
 	ai_move, -1, NULL,
 	ai_move, 0, NULL,
 	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
 };
-mmove_t placeholder_move_pain = { FRAME_attak01, FRAME_attak07, placeholder_frames_pain, NULL };
+mmove_t placeholder_move_pain1 = { FRAME_pain101, FRAME_pain113, placeholder_frames_pain1, NULL };
+mframe_t placeholder_frames_pain2[] =
+{
+	ai_move, 2, NULL,
+	ai_move, 0, NULL,
+	ai_move, -5, NULL,
+	ai_move, 3, NULL,
+	ai_move, -1, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+	ai_move, 0, NULL,
+};
+mmove_t placeholder_move_pain2 = { FRAME_pain201, FRAME_pain214, placeholder_frames_pain2, placeholder_run };
 
 void placeholder_pain(edict_t* self, edict_t* other, float kick, int damage)
 {
@@ -261,8 +334,12 @@ void placeholder_pain(edict_t* self, edict_t* other, float kick, int damage)
 	if (skill->value == 3)
 		return;
 
-	self->monsterinfo.currentmove = &placeholder_move_pain;
-		
+	if (rand() & 1) {
+		self->monsterinfo.currentmove = &placeholder_move_pain1;
+	}
+	else {
+		self->monsterinfo.currentmove = &placeholder_move_pain2;
+	}
 }
 
 void placeholder_dead(edict_t* self)
@@ -287,9 +364,14 @@ mframe_t placeholder_frames_death[] =
 	ai_move, 6,	 NULL,
 	ai_move, 0,	 NULL,
 	ai_move, 0,	 NULL,
+	ai_move, 0,	 NULL,
+	ai_move, 0,	 NULL,
+	ai_move, 0,	 NULL,
+	ai_move, 0,	 NULL,
+	ai_move, 0,	 NULL,
 	ai_move, 0,	 NULL
 };
-mmove_t placeholder_move_death = { FRAME_attak01, FRAME_attak11, placeholder_frames_death, placeholder_dead };
+mmove_t placeholder_move_death = { FRAME_die01, FRAME_die15, placeholder_frames_death, placeholder_dead };
 
 void placeholder_die(edict_t* self, edict_t* inflictor, edict_t* attacker, int damage, vec3_t point)
 {
@@ -337,7 +419,7 @@ void SP_monster_placeholder(edict_t* self)
 	self->movetype = MOVETYPE_STEP;
 	self->solid = SOLID_BBOX;
 	self->s.modelindex = gi.modelindex("models/enemies/placeholder/tris.md2");
-	VectorSet(self->mins, -16, -16, -24);
+	VectorSet(self->mins, -16, -16, 0);
 	VectorSet(self->maxs, 16, 16, 32);
 
 	self->health = 50;
@@ -347,12 +429,13 @@ void SP_monster_placeholder(edict_t* self)
 	self->pain = placeholder_pain;
 	self->die = placeholder_die;
 
+	self->monsterinfo.idle = placeholder_stand;
 	self->monsterinfo.stand = placeholder_stand;
 	self->monsterinfo.walk = placeholder_walk;
-	self->monsterinfo.run = placeholder_walk;
-	self->monsterinfo.attack = placeholder_attack;
-	self->monsterinfo.melee = placeholder_attack;
-	self->monsterinfo.sight = placeholder_sight;
+	self->monsterinfo.run = placeholder_run;
+	self->monsterinfo.attack = NULL;
+	self->monsterinfo.melee = NULL;
+	self->monsterinfo.sight = NULL;
 	//self->monsterinfo.search = placeholder_search;
 
 	gi.linkentity(self);
