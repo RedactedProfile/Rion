@@ -188,6 +188,52 @@ void placeholder_walk(edict_t* self)
 }
 
 
+mframe_t placeholder_frames_melee[] =
+{
+	ai_stand, 0, NULL, // 1
+	ai_stand, 0, NULL, // 2
+	ai_stand, 0, NULL, // 3
+	ai_stand, 0, NULL, // 4
+	ai_stand, 0, NULL, // 5
+	ai_stand, 0, NULL, // 6
+	ai_stand, 0, NULL, // 7
+	ai_stand, 0, NULL, // 8
+	ai_stand, 0, NULL, // 9
+	ai_stand, 0, NULL, // 10
+
+	ai_stand, 0, NULL, // 11
+	ai_stand, 0, NULL, // 12
+	ai_stand, 0, NULL, // 13
+	ai_stand, 0, NULL, // 14
+	ai_stand, 0, NULL, // 15
+	ai_stand, 0, NULL, // 16
+	ai_stand, 0, NULL, // 17
+	ai_stand, 0, NULL, // 18
+	ai_stand, 0, NULL, // 19
+	ai_stand, 0, NULL, // 20
+
+	ai_stand, 0, NULL, // 21
+	ai_stand, 0, NULL, // 22
+	ai_stand, 0, NULL, // 23
+	ai_stand, 0, NULL, // 24
+	ai_stand, 0, NULL, // 25
+	ai_stand, 0, NULL, // 26
+	ai_stand, 0, NULL, // 27
+	ai_stand, 0, NULL, // 28
+	ai_stand, 0, NULL, // 29
+	ai_stand, 0, NULL, // 30
+
+	ai_stand, 0, NULL, // 31
+};
+mmove_t placeholder_move_melee= { FRAME_attak01, FRAME_attak31, placeholder_frames_melee, NULL };
+void placeholder_attack(edict_t* self)
+{
+	if (range(self, self->enemy) == RANGE_MELEE)
+	{
+		self->monsterinfo.currentmove = &placeholder_move_melee;
+	}
+}
+
 mframe_t placeholder_frames_pain[] =
 {
 	ai_move, 2, NULL,
@@ -290,7 +336,7 @@ void SP_monster_placeholder(edict_t* self)
 
 	self->movetype = MOVETYPE_STEP;
 	self->solid = SOLID_BBOX;
-	self->s.modelindex = gi.modelindex("models/monsters/placeholder/tris.md2");
+	self->s.modelindex = gi.modelindex("models/enemies/placeholder/tris.md2");
 	VectorSet(self->mins, -16, -16, -24);
 	VectorSet(self->maxs, 16, 16, 32);
 
@@ -304,8 +350,8 @@ void SP_monster_placeholder(edict_t* self)
 	self->monsterinfo.stand = placeholder_stand;
 	self->monsterinfo.walk = placeholder_walk;
 	self->monsterinfo.run = placeholder_walk;
-	self->monsterinfo.attack = NULL;
-	//self->monsterinfo.melee = placeholder_attack;
+	self->monsterinfo.attack = placeholder_attack;
+	self->monsterinfo.melee = placeholder_attack;
 	self->monsterinfo.sight = placeholder_sight;
 	//self->monsterinfo.search = placeholder_search;
 
