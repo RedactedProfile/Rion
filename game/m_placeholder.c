@@ -115,58 +115,8 @@ mframe_t placeholder_frames_stand[] =
 	ai_stand, 0, NULL, // 82
 	ai_stand, 0, NULL, // 83
 	ai_stand, 0, NULL, // 84
-	ai_stand, 0, NULL, // 85
-	ai_stand, 0, NULL, // 86
-	ai_stand, 0, NULL, // 87
-	ai_stand, 0, NULL, // 88
-	ai_stand, 0, NULL, // 89
-	ai_stand, 0, NULL, // 90
-
-	ai_stand, 0, NULL, // 91
-	ai_stand, 0, NULL, // 92
-	ai_stand, 0, NULL, // 93
-	ai_stand, 0, NULL, // 94
-	ai_stand, 0, NULL, // 95
-	ai_stand, 0, NULL, // 96
-	ai_stand, 0, NULL, // 97
-	ai_stand, 0, NULL, // 98
-	ai_stand, 0, NULL, // 99
-	ai_stand, 0, NULL, // 100
-
-	ai_stand, 0, NULL, // 101
-	ai_stand, 0, NULL, // 102
-	ai_stand, 0, NULL, // 103
-	ai_stand, 0, NULL, // 104
-	ai_stand, 0, NULL, // 105
-	ai_stand, 0, NULL, // 106
-	ai_stand, 0, NULL, // 107
-	ai_stand, 0, NULL, // 108
-	ai_stand, 0, NULL, // 109
-	ai_stand, 0, NULL, // 110
-
-	ai_stand, 0, NULL, // 111
-	ai_stand, 0, NULL, // 112
-	ai_stand, 0, NULL, // 113
-	ai_stand, 0, NULL, // 114
-	ai_stand, 0, NULL, // 115
-	ai_stand, 0, NULL, // 116
-	ai_stand, 0, NULL, // 117
-	ai_stand, 0, NULL, // 118
-	ai_stand, 0, NULL, // 119
-	ai_stand, 0, NULL, // 120
-
-	ai_stand, 0, NULL, // 121
-	ai_stand, 0, NULL, // 122
-	ai_stand, 0, NULL, // 123
-	ai_stand, 0, NULL, // 124
-	ai_stand, 0, NULL, // 125
-	ai_stand, 0, NULL, // 126
-	ai_stand, 0, NULL, // 127
-	ai_stand, 0, NULL, // 128
-	ai_stand, 0, NULL, // 130
-	ai_stand, 0, NULL, // 120
 };
-mmove_t placeholder_move_stand = { FRAME_stand01, FRAME_stand130, placeholder_frames_stand, NULL };
+mmove_t placeholder_move_stand = { FRAME_stand01, FRAME_stand84, placeholder_frames_stand, NULL };
 
 void placeholder_stand(edict_t* self)
 {
@@ -259,22 +209,8 @@ mframe_t placeholder_frames_melee[] =
 	ai_stand, 0, NULL, // 15
 	ai_stand, 0, NULL, // 16
 	ai_stand, 0, NULL, // 17
-	ai_stand, 0, NULL, // 18
-	ai_stand, 0, NULL, // 19
-	ai_stand, 0, NULL, // 20
-
-	ai_stand, 0, NULL, // 21
-	ai_stand, 0, NULL, // 22
-	ai_stand, 0, NULL, // 23
-	ai_stand, 0, NULL, // 24
-	ai_stand, 0, NULL, // 25
-	ai_stand, 0, NULL, // 26
-	ai_stand, 0, NULL, // 27
-	ai_stand, 0, NULL, // 28
-	ai_stand, 0, NULL, // 29
-	ai_stand, 0, NULL, // 30
 };
-mmove_t placeholder_move_melee= { FRAME_attak01, FRAME_attak30, placeholder_frames_melee, NULL };
+mmove_t placeholder_move_melee= { FRAME_attak01, FRAME_attak17, placeholder_frames_melee, NULL };
 void placeholder_attack(edict_t* self)
 {
 	if (range(self, self->enemy) == RANGE_MELEE)
@@ -299,7 +235,7 @@ mframe_t placeholder_frames_pain1[] =
 	ai_move, 0, NULL,
 	ai_move, 0, NULL,
 };
-mmove_t placeholder_move_pain1 = { FRAME_pain101, FRAME_pain113, placeholder_frames_pain1, NULL };
+mmove_t placeholder_move_pain1 = { FRAME_pain101, FRAME_pain113, placeholder_frames_pain1, placeholder_run };
 mframe_t placeholder_frames_pain2[] =
 {
 	ai_move, 2, NULL,
@@ -422,7 +358,7 @@ void SP_monster_placeholder(edict_t* self)
 	VectorSet(self->mins, -16, -16, 0);
 	VectorSet(self->maxs, 16, 16, 32);
 
-	self->health = 50;
+	self->health = 200;
 	self->gib_health = -50;
 	self->mass = 200;
 
@@ -433,8 +369,8 @@ void SP_monster_placeholder(edict_t* self)
 	self->monsterinfo.stand = placeholder_stand;
 	self->monsterinfo.walk = placeholder_walk;
 	self->monsterinfo.run = placeholder_run;
-	self->monsterinfo.attack = NULL;
-	self->monsterinfo.melee = NULL;
+	self->monsterinfo.attack = placeholder_attack;
+	self->monsterinfo.melee = placeholder_attack;
 	self->monsterinfo.sight = NULL;
 	//self->monsterinfo.search = placeholder_search;
 
