@@ -2000,20 +2000,31 @@ VkResult QVk_BeginFrame()
 	}
 #endif
 
-	VkResult result = vkAcquireNextImageKHR(vk_device.logical, vk_swapchain.sc, UINT32_MAX, vk_imageAvailableSemaphores[vk_activeBufferIdx], VK_NULL_HANDLE, &vk_imageIndex);
-	// for VK_OUT_OF_DATE_KHR and VK_SUBOPTIMAL_KHR it'd be fine to just rebuild the swapchain but let's take the easy way out and restart video system
-	if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || result == VK_ERROR_SURFACE_LOST_KHR
+	while (1)
+	{
+		VkResult result = vkAcquireNextImageKHR(vk_device.logical, vk_swapchain.sc, UINT32_MAX, vk_imageAvailableSemaphores[vk_activeBufferIdx], VK_NULL_HANDLE, &vk_imageIndex);
+		// for VK_OUT_OF_DATE_KHR and VK_SUBOPTIMAL_KHR it'd be fine to just rebuild the swapchain but let's take the easy way out and restart video system
+		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || result == VK_ERROR_SURFACE_LOST_KHR
 #ifdef FULL_SCREEN_EXCLUSIVE_ENABLED
-		|| result == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT
+			|| result == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT
 #endif
-		)
-	{
-		ri.Con_Printf(PRINT_ALL, "QVk_BeginFrame(): received %s after vkAcquireNextImageKHR - restarting video!\n", QVk_GetError(result));
-		return result;
-	}
-	else if (result != VK_SUCCESS)
-	{
-		Sys_Error("QVk_BeginFrame(): unexpected error after vkAcquireNextImageKHR: %s", QVk_GetError(result));
+			)
+		{
+			ri.Con_Printf(PRINT_ALL, "QVk_BeginFrame(): received %s after vkAcquireNextImageKHR - restarting video!\n", QVk_GetError(result));
+			return result;
+		}
+		else if (result != VK_SUCCESS)
+		{
+			if (result == VK_TIMEOUT || result == VK_NOT_READY)
+			{
+				continue;
+			}
+			Sys_Error("QVk_BeginFrame(): unexpected error after vkAcquireNextImageKHR: %s", QVk_GetError(result));
+		}
+		else if (result == VK_SUCCESS)
+		{
+			break;
+		}
 	}
 
 	vk_activeCmdbuffer = vk_commandbuffers[vk_activeBufferIdx];
